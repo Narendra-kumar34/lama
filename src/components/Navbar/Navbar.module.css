@@ -1,0 +1,30 @@
+.wrapper {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logoAndNameWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.applicationName {
+    color: var(--color-primary);
+    font-size: 37.74px;
+    font-weight: 800;
+}
+
+.optionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
