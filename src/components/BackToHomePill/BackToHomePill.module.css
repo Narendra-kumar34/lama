@@ -1,0 +1,18 @@
+.wrapper {
+  font-weight: 400;
+  font-size: 21px;
+  color: rgba(60, 60, 60, 1);
+  border: 0.75px solid rgba(153, 153, 153, 1);
+  padding: 0.25rem 1rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 
+    0px 0px 0px 0px rgba(0, 0, 0, 0.06),
+    0.75px 1.5px 3.75px 0px rgba(0, 0, 0, 0.06),
+    3px 6px 6.75px 0px rgba(0, 0, 0, 0.05),
+    6.75px 13.51px 9px 0px rgba(0, 0, 0, 0.03),
+    12.01px 24.01px 10.5px 0px rgba(0, 0, 0, 0.01),
+    18.76px 36.77px 12.01px 0px rgba(0, 0, 0, 0);
+}
