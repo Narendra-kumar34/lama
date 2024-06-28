@@ -4,6 +4,7 @@ import YTimg from "../../assets/YTimg.png";
 import SpotifyImg from "../../assets/SpotifyImg.png";
 import RSSimg from "../../assets/RSSimg.png";
 import UploadModal from "../modals/UploadModal/UploadModal";
+import DropBox from "../DropBox/DropBox";
 
 const data = [
     {
@@ -39,6 +40,8 @@ export default function UploadSection() {
       <div className={styles.modalsWrapper}>
         {data.map((platform, idx) => <UploadModal platformImage={platform.platformImage} platformName={platform.platformName} key={idx} />)}
       </div>
+      <div className={styles.divider}>or</div>
+      <DropBox />
     </div>
   );
 }

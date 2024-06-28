@@ -9,3 +9,8 @@
         grid-template-columns: 1fr;
     }
 }
+
+.uploadSectionWrapper {
+    height: 100vh;
+    overflow-y: auto;
+}
