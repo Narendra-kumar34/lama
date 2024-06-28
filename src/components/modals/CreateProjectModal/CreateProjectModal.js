@@ -39,7 +39,7 @@ export default function CreateProjectModal() {
     if(projectName) {
         setProjectName("");
         closeModal();
-        navigate("/projects");
+        navigate("/projects", { state: { projectName: projectName, sectionName: "Upload" } });
     }
   };
 
