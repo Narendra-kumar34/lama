@@ -1,0 +1,15 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100%;
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+.staticDrawer {
+    grid-column: 1;
+}

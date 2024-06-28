@@ -3,6 +3,7 @@ import styles from "./CreateProjectModal.module.css";
 import { useState } from "react";
 import Modal from "react-modal";
 import PlusImg from "../../../assets/plusImg.png";
+import { useNavigate } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
@@ -23,6 +24,7 @@ const customStyles = {
 export default function CreateProjectModal() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
+  const navigate = useNavigate();
 
   function openModal() {
     setIsOpen(true);
@@ -37,6 +39,7 @@ export default function CreateProjectModal() {
     if(projectName) {
         setProjectName("");
         closeModal();
+        navigate("/projects");
     }
   };
 

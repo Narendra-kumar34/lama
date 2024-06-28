@@ -1,0 +1,58 @@
+.wrapper {
+    background-color: rgba(243, 232, 255, 1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0rem 1rem 1rem 0rem;
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        display: none;
+    }
+}
+
+.logoAndNameWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+}
+
+.applicationName {
+    color: var(--color-primary);
+    font-size: 37.74px;
+    font-weight: 800;
+}
+
+.optionsWrapper {
+    padding: 0rem 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 2rem;
+    background: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.Button:hover {
+    background-color: rgba(237, 231, 225, 1);
+}
+
+.optionNumber {
+    background-color: lightgray;
+    border-radius: 50%;
+    padding: 0.5rem 0.95rem;
+}
