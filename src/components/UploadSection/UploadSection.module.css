@@ -1,0 +1,10 @@
+.wrapper {
+    padding: 0rem 2rem 2rem 2.5rem;
+}
+
+.modalsWrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
+    column-gap: 2rem;
+}
