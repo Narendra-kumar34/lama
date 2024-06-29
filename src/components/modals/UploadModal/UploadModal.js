@@ -72,7 +72,6 @@ export default function UploadModal({ platformImage, platformName, type="normal"
         <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
           <div style={{ width: "100%" }}>
             <label>Name</label>
-            <br />
             <input
               className={styles.inputBox}
               type="text"
@@ -82,7 +81,6 @@ export default function UploadModal({ platformImage, platformName, type="normal"
           </div>
           <div style={{ width: "100%" }}>
             <label>Description</label>
-            <br />
             <textarea
               className={styles.inputBox}
               rows="2"

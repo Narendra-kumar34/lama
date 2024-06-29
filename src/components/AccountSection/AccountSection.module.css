@@ -1,0 +1,60 @@
+.wrapper {
+  padding: 0rem 2rem 2rem 2.5rem;
+}
+
+.detailsWrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  column-gap: 2rem;
+  align-items: center;
+}
+
+.inputBox {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgba(153, 153, 153, 1);
+  border-radius: 8px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.profilePic {
+  height: 200px;
+  width: 200px;
+}
+
+.banner {
+    padding: 1rem 2rem;
+    color: white;
+    background-color: var(--color-primary);
+    font-size: 20.64px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1rem;
+}
+
+.bannerButton {
+    padding: 0.5rem 1rem;
+    color: rgba(60, 60, 60, 1);
+    font-size: 20.54px;
+    background-color: white;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.cancelButton {
+    margin-top: 1.5rem;
+    border: none;
+    color: var(--color-red);
+    background: none;
+    font-weight: 700;
+    cursor: pointer;
+}

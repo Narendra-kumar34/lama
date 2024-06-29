@@ -8,7 +8,7 @@ export default function InsiderNavbar({ projectName="Sample Project", sectionNam
     return(<div className={styles.wrapper}>
         <div className={styles.pathBox}>
             <Link to="/"><HomeIcon /></Link>
-            <div className={styles.projectName}>{`/ ${projectName} /`}</div>
+            {sectionName !== "/ Account Settings" && <div className={styles.projectName}>{`/ ${projectName} /`}</div>}
             <div className={styles.sectionName}>{sectionName}</div>
         </div>
         <div className={styles.otherOptions}>
