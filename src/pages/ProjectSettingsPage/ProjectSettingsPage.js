@@ -12,7 +12,7 @@ export default function ProjectSettingsPage() {
     return(
         <div className={styles.wrapper}>
             <div className={styles.staticDrawer}>
-                <StaticDrawer />
+                <StaticDrawer projectName={projectName} />
             </div>
             <div className={styles.uploadSectionWrapper}>
                 <InsiderNavbar projectName={projectName} sectionName="Upload" />
