@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import SettingsIcon from "../../assets/settingsIcon.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function StaticDrawer() {
+export default function StaticDrawer({ projectName="sampleProject" }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -12,7 +12,7 @@ export default function StaticDrawer() {
 
     const handleNavigate = (currPath) => {
         if(pathname !== currPath) {
-            navigate(currPath);
+            navigate(currPath, { state: { projectName: projectName } });
         }
     }
   return (

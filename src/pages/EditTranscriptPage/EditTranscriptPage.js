@@ -12,7 +12,7 @@ export default function EditTranscriptPage() {
 
     return(
         <div className={styles.wrapper}>
-            <StaticDrawer />
+            <StaticDrawer projectName={projectName} />
             <div className={styles.transcriptSectionWrapper}>
                 <InsiderNavbar projectName={projectName} sectionName="Transcript" />
                 <TranscriptSection projectName={projectName} fileId={fileId} />
