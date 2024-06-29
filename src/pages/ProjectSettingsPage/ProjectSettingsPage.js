@@ -8,7 +8,6 @@ import UploadSection from "../../components/UploadSection/UploadSection";
 export default function ProjectSettingsPage() {
     const location = useLocation();
     const projectName = location.state && location.state.projectName;
-    const sectionName = location.state && location.state.sectionName;
 
     return(
         <div className={styles.wrapper}>
@@ -16,7 +15,7 @@ export default function ProjectSettingsPage() {
                 <StaticDrawer />
             </div>
             <div className={styles.uploadSectionWrapper}>
-                <InsiderNavbar projectName={projectName} sectionName={sectionName} />
+                <InsiderNavbar projectName={projectName} sectionName="Upload" />
                 <UploadSection projectName={projectName} />
             </div>
         </div>

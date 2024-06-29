@@ -1,0 +1,80 @@
+.wrapper {
+    padding: 0rem 2rem 2rem 2.5rem;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+}
+
+.saveOrDiscardButtonsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.discardButton {
+    background: none;
+    padding: 0.5rem 3rem;
+    font-size: 20.55px;
+    font-weight: 500;
+    border-radius: 1rem;
+    border: 2px solid var(--color-red);
+    color: var(--color-red);
+    cursor: pointer;
+}
+
+.saveButton {
+    padding: 0.5rem 3rem;
+    font-size: 20.55px;
+    font-weight: 500;
+    border-radius: 1rem;
+    background-color: rgba(33, 25, 53, 1);
+    color: white;
+    cursor: pointer;
+}
+
+.transcriptionWrapper {
+    width: 100%;
+    height: 25rem;
+    padding: 1rem 0.5rem;
+    overflow-y: auto;
+    border: 2px solid var(--color-primary);
+    border-radius: 2rem;
+}
+
+.optionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}
+
+.editModePill {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.searchIconBox {
+    padding: 2px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    background-color: rgba(237, 231, 225, 1);
+    margin-right: 2rem;
+    cursor: pointer;
+}
+
+.description {
+    padding: 0rem 2rem 0rem 0.5rem;
+}
+
+.textArea {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+}
