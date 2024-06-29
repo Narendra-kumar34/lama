@@ -20,7 +20,7 @@ const customStyles = {
   },
 };
 
-export default function UploadModal({ platformImage, platformName }) {
+export default function UploadModal({ platformImage, platformName, type="normal" }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -45,12 +45,12 @@ export default function UploadModal({ platformImage, platformName }) {
       <button
         className={styles.Button}
         onClick={openModal}
-        style={{ fontSize: "26.64px" }}
+        style={{ fontSize: `${type === "normal" ? "26.64px" : "19.17px"}` }}
       >
-        <div style={{ height: "82.71px", width: "120px" }}>
-          <img src={platformImage} alt="source" style={{ objectFit: "fill" }} />
+        <div style={{ height: `${type === "normal" ? "82.71px" : "60px"}`, width: `${type === "normal" ? "120px" : "90px"}` }}>
+          {platformImage !== null ? <img src={platformImage} alt="source" style={{ objectFit: "fill" }} /> : <div className={styles.blankImage}></div>}
         </div>
-        {`Upload from ${platformName}`}
+        {`Upload ${platformName}`}
       </button>
       <Modal
         isOpen={modalIsOpen}
@@ -61,7 +61,7 @@ export default function UploadModal({ platformImage, platformName }) {
         <div className={styles.head}>
           <div className={styles.logoAndName}>
             <div style={{ height: "82.71px", width: "84px" }}>
-              <img alt="source" src={platformImage} />
+            {platformImage !== null ? <img src={platformImage} alt="source" style={{ objectFit: "fill" }} /> : <div className={styles.blankImage}></div>}
             </div>
             <h1>{`Upload from ${platformName}`}</h1>
           </div>

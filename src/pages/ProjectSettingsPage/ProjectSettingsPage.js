@@ -17,7 +17,7 @@ export default function ProjectSettingsPage() {
             </div>
             <div className={styles.uploadSectionWrapper}>
                 <InsiderNavbar projectName={projectName} sectionName={sectionName} />
-                <UploadSection />
+                <UploadSection projectName={projectName} />
             </div>
         </div>
     )

@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 1.5rem;
-    column-gap: 4rem;
+    column-gap: 3.75rem;
 }
 
 .divider {
@@ -15,4 +15,86 @@
     color: rgba(153, 153, 153, 1);
     padding: 1rem;
     text-align: center;
+}
+
+.miniModalsWrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 1rem;
+    column-gap: 2rem;
+    padding-bottom: 2rem;
+}
+
+.banner {
+    padding: 1rem 2rem;
+    color: white;
+    background-color: var(--color-primary);
+    font-size: 26.64px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1rem;
+}
+
+.bannerButton {
+    padding: 0.5rem 1rem;
+    color: rgba(60, 60, 60, 1);
+    font-size: 21.54px;
+    background-color: white;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.tableWrapper {
+    width: 100%;
+    margin: 2rem 0rem;
+    padding-top: 2rem;
+    border: 1px solid rgba(153, 153, 153, 1);
+    border-radius: 1rem;
+}
+
+table {
+    width: 100%;
+    font-size: 26.64px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.tableRow {
+    border-bottom: 2px solid rgba(217, 217, 217, 1);
+}
+
+tbody .tableRow:last-child {
+    border: none;
+}
+
+td {
+    padding: 1rem 0rem;
+}
+
+th {
+    padding-bottom: 1rem;
+}
+
+.buttonsWrapper {
+    font-size: 17.89px;
+    font-weight: 500;
+}
+
+.editButton {
+    border: 0.89px solid rgba(217, 217, 217, 1);
+    color: rgba(60, 60, 60, 1);
+    background: none;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.deleteButton {
+    border: 0.89px solid rgba(217, 217, 217, 1);
+    color: var(--color-red);
+    background: none;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
 }
