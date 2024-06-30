@@ -6,6 +6,7 @@ import Hero from "../../components/Hero/Hero";
 import CreateProjectModal from "../../components/modals/CreateProjectModal/CreateProjectModal";
 import Card from "../../components/Card/Card";
 import CollectEmailModal from "../../components/modals/CollectEmailModal/CollectEmailModal";
+import { config } from "../../App";
 
 const data = [
   {
