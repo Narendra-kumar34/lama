@@ -87,9 +87,39 @@ const createEpisode = async (email, projName, episodeName, description) => {
     return episodeBody;
 }
 
+const getTranscript = async (email, projName, episodeName) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    const episode = project.episodes.find((episode) => episode.name === episodeName);
+    return episode.description;
+}
+
+const updateTranscript = async (email, projName, episodeName, description) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    const episode = project.episodes.find((episode) => episode.name === episodeName);
+    episode.description = description;
+    await projectsObj.save();
+    return description;
+}
+
 module.exports = {
     getProjects,
     createProject,
     getEpisodes,
-    createEpisode
+    createEpisode,
+    getTranscript,
+    updateTranscript
 };

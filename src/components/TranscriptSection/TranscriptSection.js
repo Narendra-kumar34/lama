@@ -1,14 +1,61 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./TranscriptSection.module.css";
 import EditModePill from "../EditModePill/EditModePill";
 import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { useState } from "react";
+import { config } from "../../App";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const description = `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
 
-export default function TranscriptSection({ projectName, fileId }) {
+export default function TranscriptSection({ projectName, episodeName }) {
   const [isEditMode, setEditMode] = useState(false);
-  const [currDescription, setDescription] = useState(description);
+  const [currDescription, setDescription] = useState();
+  const email = localStorage.getItem("email");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const funct = async () => {
+      await fetchTranscript();
+    }
+    funct();
+  }, []);
+
+  const fetchTranscript = async () => {
+    try {
+      const response = await axios.get(`${config.endpoint}/projects/transcript`,{
+        headers: {
+          email: email,
+          name: projectName,
+          episodeName: episodeName
+        }
+      });
+      setDescription(response.data);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  const handleDiscard = () => {
+    navigate("/projects", { state: { projectName: projectName } });
+  };
+
+  const handleSave = async () => {
+    try {
+      await axios.patch(`${config.endpoint}/projects/transcript`,{
+          email: email,
+          name: projectName,
+          episodeName: episodeName,
+          description: currDescription
+      });
+      navigate("/projects", { state: { projectName: projectName } });
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.head}>
@@ -16,8 +63,8 @@ export default function TranscriptSection({ projectName, fileId }) {
           Edit Transcript
         </h1>
         {isEditMode && <div className={styles.saveOrDiscardButtonsWrapper}>
-            <button className={styles.discardButton}>Discard</button>
-            <button className={styles.saveButton}>Save & exit</button>
+            <button className={styles.discardButton} onClick={handleDiscard}>Discard</button>
+            <button className={styles.saveButton} onClick={handleSave}>Save & exit</button>
         </div>}
       </div>
       <div className={styles.transcriptionWrapper}>
@@ -30,7 +77,7 @@ export default function TranscriptSection({ projectName, fileId }) {
           </div>
         </div>
         <div className={styles.description}>
-          {!isEditMode ? description : <textarea className={styles.textArea} rows="12" value={currDescription} onChange={(e) => setDescription(e.target.value)} />}
+          {!isEditMode ? currDescription : <textarea className={styles.textArea} rows="12" value={currDescription} onChange={(e) => setDescription(e.target.value)} />}
         </div>
       </div>
     </div>

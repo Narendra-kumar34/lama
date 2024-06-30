@@ -37,11 +37,23 @@ const getEpisodes = catchAsync(async (req, res) => {
 const createEpisode = catchAsync(async (req, res) => {
     const episode = await projectService.createEpisode(req.body.email, req.body.name, req.body.episodeName, req.body.description);
     res.status(201).send(episode);
-})
+});
+
+const getTranscript = catchAsync(async (req, res) => {
+    const transcript = await projectService.getTranscript(req.headers.email, req.headers.name, req.headers.episodename);
+    res.status(200).send(transcript);
+});
+
+const updateTranscript = catchAsync(async (req, res) => {
+    const transcript = await projectService.updateTranscript(req.body.email, req.body.name, req.body.episodeName, req.body.description);
+    res.status(201).send(transcript);
+});
 
 module.exports = {
     getProjects,
     createProject,
     getEpisodes,
-    createEpisode
+    createEpisode,
+    getTranscript,
+    updateTranscript
 }

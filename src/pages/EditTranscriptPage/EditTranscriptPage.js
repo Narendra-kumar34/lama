@@ -8,14 +8,14 @@ import TranscriptSection from "../../components/TranscriptSection/TranscriptSect
 export default function EditTranscriptPage() {
     const location = useLocation();
     const projectName = location.state && location.state.projectName;
-    const fileId = location.state && location.state.fileId;
+    const episodeName = location.state && location.state.episodeName;
 
     return(
         <div className={styles.wrapper}>
             <StaticDrawer projectName={projectName} />
             <div className={styles.transcriptSectionWrapper}>
                 <InsiderNavbar projectName={projectName} sectionName="Transcript" />
-                <TranscriptSection projectName={projectName} fileId={fileId} />
+                <TranscriptSection projectName={projectName} episodeName={episodeName} />
             </div>
         </div>
     )

@@ -90,8 +90,8 @@ export default function UploadSection({ projectName = "sampleProject" }) {
     return formattedDate;
   }
 
-  const handleEdit = (fileId) => {
-    navigate("/transcript", { state: { projectName: projectName, fileId: fileId } });
+  const handleEdit = (episodeName) => {
+    navigate("/transcript", { state: { projectName: projectName, episodeName: episodeName } });
   }
   return (
     <div className={styles.wrapper}>
@@ -150,7 +150,7 @@ export default function UploadSection({ projectName = "sampleProject" }) {
                   <td>Done</td>
                   <td>
                     <div className={styles.buttonsWrapper}>
-                      <button className={styles.editButton} onClick={() => handleEdit(file.fileId)}>Edit</button>
+                      <button className={styles.editButton} onClick={() => handleEdit(file.name)}>Edit</button>
                       <button className={styles.deleteButton}>Delete</button>
                     </div>
                   </td>
