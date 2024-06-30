@@ -20,8 +20,9 @@ export default function ConfigurationSection({ projectName }) {
           name: projectName
         }
       });
-    setGeneralInfo(response.data.general);
-    setDisplayInfo(response.data.display);
+      console.log(response.data);
+    setGeneralInfo(response.data.general || {});
+    setDisplayInfo(response.data.display || {});
     }
     catch(err) {
       console.log(err);
