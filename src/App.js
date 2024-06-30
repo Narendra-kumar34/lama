@@ -7,7 +7,7 @@ import WidgetConfigurationPage from './pages/WidgetConfigurationPage/WidgetConfi
 import AccountSettingsPage from './pages/AccountSettingsPage/AccountSettingsPage';
 
 export const config = {
-  endpoint: "http://localhost:8082/v1"
+  endpoint: "https://lama-backend-377h.onrender.com/v1"
 }
 
 const router = createBrowserRouter([
