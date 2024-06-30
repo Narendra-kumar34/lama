@@ -115,11 +115,26 @@ const updateTranscript = async (email, projName, episodeName, description) => {
     return description;
 }
 
+const deleteEpisode = async (email, projName, episodeName) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    const newEpisodes = project.episodes.filter((episode) => episode.name !== episodeName);
+    project.episodes = newEpisodes;
+    await projectsObj.save();
+}
+
 module.exports = {
     getProjects,
     createProject,
     getEpisodes,
     createEpisode,
     getTranscript,
-    updateTranscript
+    updateTranscript,
+    deleteEpisode
 };

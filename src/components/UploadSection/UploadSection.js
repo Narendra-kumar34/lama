@@ -93,6 +93,22 @@ export default function UploadSection({ projectName = "sampleProject" }) {
   const handleEdit = (episodeName) => {
     navigate("/transcript", { state: { projectName: projectName, episodeName: episodeName } });
   }
+
+  const handleDelete = async (episodeName) => {
+    try {
+      await axios.delete(`${config.endpoint}/projects/episode`,{
+        headers: {
+          email: email,
+          name: projectName,
+          episodeName: episodeName
+        }
+      });
+      await fetchEpisodes();
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
   return (
     <div className={styles.wrapper}>
       <h1 style={{ color: "var(--color-primary)", paddingBottom: "2rem" }}>
@@ -151,7 +167,7 @@ export default function UploadSection({ projectName = "sampleProject" }) {
                   <td>
                     <div className={styles.buttonsWrapper}>
                       <button className={styles.editButton} onClick={() => handleEdit(file.name)}>Edit</button>
-                      <button className={styles.deleteButton}>Delete</button>
+                      <button className={styles.deleteButton} onClick={() => handleDelete(file.name)}>Delete</button>
                     </div>
                   </td>
                 </tr>

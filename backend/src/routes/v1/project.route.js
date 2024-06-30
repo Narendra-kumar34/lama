@@ -9,5 +9,6 @@ router.get("/episodes", projectController.getEpisodes);
 router.post("/episodes", projectController.createEpisode);
 router.get("/transcript", projectController.getTranscript);
 router.patch("/transcript", projectController.updateTranscript);
+router.delete("/episode", projectController.deleteEpisode);
 
 module.exports = router;

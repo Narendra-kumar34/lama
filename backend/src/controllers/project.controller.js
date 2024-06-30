@@ -49,11 +49,17 @@ const updateTranscript = catchAsync(async (req, res) => {
     res.status(201).send(transcript);
 });
 
+const deleteEpisode = catchAsync(async (req, res) => {
+    await projectService.deleteEpisode(req.headers.email, req.headers.name, req.headers.episodename);
+    res.status(204).send();
+})
+
 module.exports = {
     getProjects,
     createProject,
     getEpisodes,
     createEpisode,
     getTranscript,
-    updateTranscript
+    updateTranscript,
+    deleteEpisode
 }
