@@ -4,6 +4,8 @@ import { useState } from "react";
 import Modal from "react-modal";
 import PlusImg from "../../../assets/plusImg.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { config } from "../../../App";
 
 Modal.setAppElement("#root");
 
@@ -21,10 +23,11 @@ const customStyles = {
   },
 };
 
-export default function CreateProjectModal({ type="normal" }) {
+export default function CreateProjectModal({ type = "normal" }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
   const navigate = useNavigate();
+  const email = localStorage.getItem("email");
 
   function openModal() {
     setIsOpen(true);
@@ -34,27 +37,41 @@ export default function CreateProjectModal({ type="normal" }) {
     setIsOpen(false);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(projectName) {
-        setProjectName("");
-        closeModal();
-        navigate("/projects", { state: { projectName: projectName } });
+    if (projectName) {
+      try {
+        await axios.post(`${config.endpoint}/projects`, {
+          email: email,
+          name: projectName,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      setProjectName("");
+      closeModal();
+      navigate("/projects", { state: { projectName: projectName } });
     }
   };
 
   const handleCancel = () => {
     setProjectName("");
     closeModal();
-  }
+  };
 
   return (
     <>
-      <button className={type==="normal" ? styles.Button : styles.miniButton} onClick={openModal}>
+      <button
+        className={type === "normal" ? styles.Button : styles.miniButton}
+        onClick={openModal}
+      >
         <img
           src={PlusImg}
           alt="+"
-          style={{ height: `${type==="normal" ? "55.85px" : "36.87px"}`, width: `${type==="normal" ? "55.85px" : "36.87px"}` }}
+          style={{
+            height: `${type === "normal" ? "55.85px" : "36.87px"}`,
+            width: `${type === "normal" ? "55.85px" : "36.87px"}`,
+          }}
         />
         Create New Project
       </button>
@@ -82,8 +99,14 @@ export default function CreateProjectModal({ type="normal" }) {
             </div>
           )}
           <div className={styles.optionsWrapper}>
-            <button className={styles.cancelButton} onClick={handleCancel}>Cancel</button>
-            <input className={styles.createButton} type="submit" value="Create" />
+            <button className={styles.cancelButton} onClick={handleCancel}>
+              Cancel
+            </button>
+            <input
+              className={styles.createButton}
+              type="submit"
+              value="Create"
+            />
           </div>
         </form>
       </Modal>
