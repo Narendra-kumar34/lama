@@ -14,7 +14,7 @@ export default function WidgetConfigurationPage() {
             <StaticDrawer projectName={projectName} />
             <div className={styles.configurationSectionWrapper}>
                 <InsiderNavbar projectName={projectName} sectionName="Widget Configuration" />
-                <ConfigurationSection />
+                <ConfigurationSection projectName={projectName} />
             </div>
         </div>
     )

@@ -52,7 +52,17 @@ const updateTranscript = catchAsync(async (req, res) => {
 const deleteEpisode = catchAsync(async (req, res) => {
     await projectService.deleteEpisode(req.headers.email, req.headers.name, req.headers.episodename);
     res.status(204).send();
-})
+});
+
+const saveConfiguration = catchAsync(async (req, res) => {
+    const configuration = await projectService.saveConfiguration(req.body.email, req.body.name, req.body.configuration);
+    res.status(201).send(configuration);
+});
+
+const getConfiguration = catchAsync(async (req, res) => {
+    const configuration = await projectService.getConfiguration(req.headers.email, req.headers.name);
+    res.status(200).send(configuration);
+});
 
 module.exports = {
     getProjects,
@@ -61,5 +71,7 @@ module.exports = {
     createEpisode,
     getTranscript,
     updateTranscript,
-    deleteEpisode
+    deleteEpisode,
+    saveConfiguration,
+    getConfiguration
 }

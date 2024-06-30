@@ -1,8 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ConfigurationSection.module.css";
 import { ReactComponent as UploadIcon } from "../../assets/uploadIcon.svg";
+import { config } from "../../App";
+import axios from "axios";
 
-export default function ConfigurationSection() {
+export default function ConfigurationSection({ projectName }) {
+  useEffect(() => {
+    const funct = async () => {
+      await fetchConfiguration();
+    }
+    funct();
+  }, []);
+
+  const fetchConfiguration = async () => {
+    try {
+      const response = await axios.get(`${config.endpoint}/projects/configuration`,{
+        headers: {
+          email: email,
+          name: projectName
+        }
+      });
+    setGeneralInfo(response.data.general);
+    setDisplayInfo(response.data.display);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  };
+
   const [generalInfo, setGeneralInfo] = useState({
     chatbotName: "",
     welcomeMessage: "",
@@ -21,10 +46,28 @@ export default function ConfigurationSection() {
   });
 
   const [activeTab, setActiveTab] = useState("general");
+  const email = localStorage.getItem("email");
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
+  const handleSave = async () => {
+    const configuration = {
+      general: JSON.parse(JSON.stringify(generalInfo)),
+      display: JSON.parse(JSON.stringify(displayInfo))
+    };
+    try {
+      await axios.post(`${config.endpoint}/projects/configuration`, {
+        email: email,
+        name: projectName,
+        configuration: configuration
+      });
+      window.alert("Changes saved")
+    } catch (err) {
+        console.log(err);
+    }
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -323,6 +366,9 @@ export default function ConfigurationSection() {
                   <p style={{padding: "0rem"}}>Recommended Size: 48x48px</p>
                 </div>
               </div>
+            </div>
+            <div className={styles.saveButtonWrapper}>
+              <div className={styles.saveButton} onClick={() => handleSave()}>Save Changes</div>
             </div>
           </div>
         </div>

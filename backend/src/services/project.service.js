@@ -129,6 +129,33 @@ const deleteEpisode = async (email, projName, episodeName) => {
     await projectsObj.save();
 }
 
+const saveConfiguration = async (email, projName, configuration) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    const configurationBody = JSON.parse(JSON.stringify(configuration));
+    project.configuration = configurationBody;
+    await projectsObj.save();
+    return configurationBody;
+}
+
+const getConfiguration = async (email, projName) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    return project.configuration;
+}
+
 module.exports = {
     getProjects,
     createProject,
@@ -136,5 +163,7 @@ module.exports = {
     createEpisode,
     getTranscript,
     updateTranscript,
-    deleteEpisode
+    deleteEpisode,
+    saveConfiguration,
+    getConfiguration
 };
