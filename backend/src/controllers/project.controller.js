@@ -1,7 +1,7 @@
-const catchAsync = require("../utils/catchAsync");
+const CatchAsync = require("../utils/CatchAsync");
 const { projectService } = require("../services");
 
-const getProjects = catchAsync(async (req, res) => {
+const getProjects = CatchAsync(async (req, res) => {
     const projects = await projectService.getProjects(req.headers.email);
     let projDetails = [];
     if(projects.length > 0) {
@@ -15,12 +15,12 @@ const getProjects = catchAsync(async (req, res) => {
     res.status(200).send(projDetails);
 });
 
-const createProject = catchAsync(async (req, res) => {
+const createProject = CatchAsync(async (req, res) => {
     const project = await projectService.createProject(req.body.email, req.body.name);
     res.status(201).send(project);
 });
 
-const getEpisodes = catchAsync(async (req, res) => {
+const getEpisodes = CatchAsync(async (req, res) => {
     const episodes = await projectService.getEpisodes(req.headers.email, req.headers.name);
     let episodesArr = [];
     if(episodes.length > 0) {
@@ -32,32 +32,32 @@ const getEpisodes = catchAsync(async (req, res) => {
     res.status(200).send(episodesArr);
 });
 
-const createEpisode = catchAsync(async (req, res) => {
+const createEpisode = CatchAsync(async (req, res) => {
     const episode = await projectService.createEpisode(req.body.email, req.body.name, req.body.episodeName, req.body.description);
     res.status(201).send(episode);
 });
 
-const getTranscript = catchAsync(async (req, res) => {
+const getTranscript = CatchAsync(async (req, res) => {
     const transcript = await projectService.getTranscript(req.headers.email, req.headers.name, req.headers.episodename);
     res.status(200).send(transcript);
 });
 
-const updateTranscript = catchAsync(async (req, res) => {
+const updateTranscript = CatchAsync(async (req, res) => {
     const transcript = await projectService.updateTranscript(req.body.email, req.body.name, req.body.episodeName, req.body.description);
     res.status(201).send(transcript);
 });
 
-const deleteEpisode = catchAsync(async (req, res) => {
+const deleteEpisode = CatchAsync(async (req, res) => {
     await projectService.deleteEpisode(req.headers.email, req.headers.name, req.headers.episodename);
     res.status(204).send();
 });
 
-const saveConfiguration = catchAsync(async (req, res) => {
+const saveConfiguration = CatchAsync(async (req, res) => {
     const configuration = await projectService.saveConfiguration(req.body.email, req.body.name, req.body.configuration);
     res.status(201).send(configuration);
 });
 
-const getConfiguration = catchAsync(async (req, res) => {
+const getConfiguration = CatchAsync(async (req, res) => {
     const configuration = await projectService.getConfiguration(req.headers.email, req.headers.name);
     res.status(200).send(configuration);
 });
