@@ -17,20 +17,31 @@ const getProjects = catchAsync(async (req, res) => {
     res.status(200).send(projDetails);
 });
 
-// const getProjectByName = catchAsync(async (req, res) => {
-//     const project = await projectService.getProjectByName(req.body.email, req.params.projectName);
-//     if(!project) {
-//         throw new ApiError(httpStatus.NOT_FOUND, "The project doesn't exist");
-//     }
-//     res.send();
-// })
-
 const createProject = catchAsync(async (req, res) => {
     const project = await projectService.createProject(req.body.email, req.body.name);
     res.status(201).send(project);
 });
 
+const getEpisodes = catchAsync(async (req, res) => {
+    const episodes = await projectService.getEpisodes(req.headers.email, req.headers.name);
+    let episodesArr = [];
+    if(episodes.length > 0) {
+        episodesArr = episodes.map((episode) => ({
+            name: episode.name,
+            uploadDateTime: episode.uploadDateTime
+        }));
+    }
+    res.status(200).send(episodesArr);
+});
+
+const createEpisode = catchAsync(async (req, res) => {
+    const episode = await projectService.createEpisode(req.body.email, req.body.name, req.body.episodeName, req.body.description);
+    res.status(201).send(episode);
+})
+
 module.exports = {
     getProjects,
-    createProject
+    createProject,
+    getEpisodes,
+    createEpisode
 }

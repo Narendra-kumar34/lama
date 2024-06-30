@@ -3,6 +3,8 @@ import styles from "./UploadModal.module.css";
 import Modal from "react-modal";
 import { useState } from "react";
 import CancelImage from "../../../assets/cancelImg.png";
+import axios from "axios";
+import { config } from "../../../App";
 
 Modal.setAppElement("#root");
 
@@ -20,10 +22,11 @@ const customStyles = {
   },
 };
 
-export default function UploadModal({ platformImage, platformName, type="normal" }) {
+export default function UploadModal({ platformImage, platformName, type="normal", projectName, setEpisodes }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const email = localStorage.getItem("email");
 
   function openModal() {
     setIsOpen(true);
@@ -33,11 +36,31 @@ export default function UploadModal({ platformImage, platformName, type="normal"
     setIsOpen(false);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setName("");
-    setDescription("");
-    closeModal();
+    try {
+      const response = await axios.post(`${config.endpoint}/projects/episodes`, {
+        email: email,
+        name: projectName,
+        episodeName: name,
+        description: description
+      });
+      const episodeBody = {
+        name: response.data.name,
+        uploadDateTime: response.data.uploadDateTime
+      };
+      setEpisodes((prevEpisodes) => [episodeBody, ...prevEpisodes]);
+      setName("");
+      setDescription("");
+      closeModal();
+    } catch (err) {
+      if(err.response.status === 422) {
+        window.alert("Duplicate Episode name")
+      }
+      else {
+        console.log(err);
+      }
+    }
   };
 
   return (

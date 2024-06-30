@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./UploadSection.module.css";
 import YTimg from "../../assets/YTimg.png";
 import SpotifyImg from "../../assets/SpotifyImg.png";
@@ -6,6 +6,8 @@ import RSSimg from "../../assets/RSSimg.png";
 import UploadModal from "../modals/UploadModal/UploadModal";
 import DropBox from "../DropBox/DropBox";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { config } from "../../App";
 
 const data = [
   {
@@ -49,31 +51,44 @@ const miniModalData = [
   },
 ];
 
-const projectFiles = [
-  {
-    fileId: "1",
-    name: "sample1",
-    uploadTime: "29th June",
-  },
-  {
-    fileId: "2",
-    name: "sample2",
-    uploadTime: "29th June",
-  },
-  {
-    fileId: "3",
-    name: "sample3",
-    uploadTime: "29th June",
-  },
-  {
-    fileId: "4",
-    name: "sample4",
-    uploadTime: "29th June",
-  },
-];
-
 export default function UploadSection({ projectName = "sampleProject" }) {
   const navigate = useNavigate();
+  const [episodes, setEpisodes] = useState([]);
+  const email = localStorage.getItem("email");
+
+  useEffect(() => {
+    const funct = async () => {
+      await fetchEpisodes();
+    }
+    funct();
+  }, []);
+
+  const fetchEpisodes = async () => {
+    try {
+      const response = await axios.get(`${config.endpoint}/projects/episodes`,{
+        headers: {
+          email: email,
+          name: projectName
+        }
+      });
+      const sortedEpisodes = response.data.sort((a, b) => new Date(b.uploadDateTime) - new Date(a.uploadDateTime));
+      setEpisodes(sortedEpisodes);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  const formatDateTime = (str) => {
+    const date = new Date(str);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear().toString().slice(-2);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const formattedDate = `${day} ${month} ${year} | ${hours}:${minutes}`;
+    return formattedDate;
+  }
 
   const handleEdit = (fileId) => {
     navigate("/transcript", { state: { projectName: projectName, fileId: fileId } });
@@ -81,15 +96,17 @@ export default function UploadSection({ projectName = "sampleProject" }) {
   return (
     <div className={styles.wrapper}>
       <h1 style={{ color: "var(--color-primary)", paddingBottom: "2rem" }}>
-        {projectFiles.length === 0 ? "Upload" : projectName}
+        {episodes.length === 0 ? "Upload" : projectName}
       </h1>
-      {projectFiles.length === 0 ? (
+      {episodes.length === 0 ? (
         <div>
           <div className={styles.modalsWrapper}>
             {data.map((platform, idx) => (
               <UploadModal
                 platformImage={platform.platformImage}
                 platformName={platform.platformName}
+                projectName={projectName}
+                setEpisodes={setEpisodes}
                 key={idx}
               />
             ))}
@@ -104,6 +121,8 @@ export default function UploadSection({ projectName = "sampleProject" }) {
               <UploadModal
                 platformImage={platform.platformImage}
                 platformName={platform.platformName}
+                projectName={projectName}
+                setEpisodes={setEpisodes}
                 type="mini"
                 key={idx}
               />
@@ -124,10 +143,10 @@ export default function UploadSection({ projectName = "sampleProject" }) {
               </tr>
             </thead>
             <tbody>
-              {projectFiles.map((file) => (
+              {episodes.map((file) => (
                 <tr className={styles.tableRow} key={file.fileId}>
                   <td>{file.name}</td>
-                  <td>{file.uploadTime}</td>
+                  <td>{formatDateTime(file.uploadDateTime)}</td>
                   <td>Done</td>
                   <td>
                     <div className={styles.buttonsWrapper}>

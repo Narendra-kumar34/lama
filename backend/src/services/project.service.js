@@ -17,15 +17,6 @@ const getProjects = async (email) => {
     }
 };
 
-const getProjectByName = async (email, name) => {
-    const projectsObj = await Project.findOne({ email: email });
-    if(!projectsObj) {
-        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
-    }
-    const project = projectsObj.projects.find((project) => project.name === name);
-    return project;
-};
-
 const createProject = async (email, name) => {
     let projectsObj = await Project.findOne({ email: email });
     if(!projectsObj) {
@@ -61,8 +52,44 @@ const createProject = async (email, name) => {
     return result;
 };
 
+const getEpisodes = async (email, projName) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    return project.episodes;
+};
+
+const createEpisode = async (email, projName, episodeName, description) => {
+    const projectsObj = await Project.findOne({ email: email });
+    if(!projectsObj) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User don't have any projects");
+    }
+    const project = projectsObj.projects.find((project) => project.name === projName);
+    if(!project) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Project is not available");
+    }
+    const duplicate = project.episodes.find((episode) => episode.name === episodeName);
+    if(duplicate) {
+        throw new ApiError(httpStatus.UNPROCESSABLE_ENTITY, "Name should be unique for each episode");
+    }
+    const episodeBody = {
+        name: episodeName,
+        uploadDateTime: new Date(),
+        description: description
+    };
+    project.episodes.push(episodeBody);
+    await projectsObj.save();
+    return episodeBody;
+}
+
 module.exports = {
     getProjects,
-    getProjectByName,
-    createProject
+    createProject,
+    getEpisodes,
+    createEpisode
 };
