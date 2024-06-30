@@ -1,6 +1,22 @@
 .backtohomePill {
     background: none;
     border: none;
-    margin-left: 1rem;
+    margin-left: 9.5rem;
+    margin-top: 1rem;
     cursor: pointer;
+}
+
+.head {
+    padding: 1rem 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.projectsGrid {
+    padding: 1rem 10rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 4rem;
+    row-gap: 2rem;
 }

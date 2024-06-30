@@ -1,0 +1,46 @@
+.wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 1rem;
+    border: 1.19px solid rgba(153, 153, 153, 1);
+    border-radius: 2rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.06),
+                1.19px 2.38px 5.95px 0px rgba(0, 0, 0, 0.06),
+                4.76px 9.52px 10.71px 0px rgba(0, 0, 0, 0.05),
+                10.71px 21.41px 14.27px 0px rgba(0, 0, 0, 0.03),
+                19.03px 38.06px 16.65px 0px rgba(0, 0, 0, 0.01),
+                29.74px 58.29px 19.03px 0px rgba(0, 0, 0, 0);
+}
+
+.icon {
+    border-radius: 1.5rem;
+    font-size: 62px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0rem 0.5rem;
+}
+
+.projectName {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.episodesCount {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(60, 60, 60, 1);
+}
+
+.lastEdited {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(150, 150, 150, 1);
+    padding-top: 1rem;
+}

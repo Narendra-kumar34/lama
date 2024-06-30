@@ -12,6 +12,20 @@
     cursor: pointer;
 }
 
+.miniButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 25px;
+    font-weight: 500;
+    color: rgba(248, 248, 248, 1);
+    background-color: rgba(33, 25, 53, 1);
+    padding: 1rem 2rem 1rem 1rem;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
 
 .formWrapper {
     display: flex;

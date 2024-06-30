@@ -21,7 +21,7 @@ const customStyles = {
   },
 };
 
-export default function CreateProjectModal() {
+export default function CreateProjectModal({ type="normal" }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
   const navigate = useNavigate();
@@ -50,11 +50,11 @@ export default function CreateProjectModal() {
 
   return (
     <>
-      <button className={styles.Button} onClick={openModal}>
+      <button className={type==="normal" ? styles.Button : styles.miniButton} onClick={openModal}>
         <img
           src={PlusImg}
           alt="+"
-          style={{ height: "55.85px", width: "55.85px" }}
+          style={{ height: `${type==="normal" ? "55.85px" : "36.87px"}`, width: `${type==="normal" ? "55.85px" : "36.87px"}` }}
         />
         Create New Project
       </button>
