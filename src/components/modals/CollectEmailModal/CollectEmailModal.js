@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./CollectEmailModal.module.css";
 import { useState } from "react";
 import Modal from "react-modal";
+import axios from "axios";
+import { config } from "../../../App";
 
 Modal.setAppElement("#root");
 
@@ -19,7 +21,7 @@ const customStyles = {
   },
 };
 
-export default function CollectEmailModal() {
+export default function CollectEmailModal({ setProjects }) {
   const [modalIsOpen, setIsOpen] = useState(true);
   const [email, setEmail] = useState("");
 
@@ -27,10 +29,21 @@ export default function CollectEmailModal() {
     setIsOpen(false);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email) {
       localStorage.setItem("email", `${email}`);
+      try {
+        const response = await axios.get(`${config.endpoint}/projects`,{
+          headers: {
+            email: email
+          }
+        });
+        setProjects(response.data);
+      }
+      catch(err) {
+        console.log(err);
+      }
       setEmail("");
       closeModal();
     }

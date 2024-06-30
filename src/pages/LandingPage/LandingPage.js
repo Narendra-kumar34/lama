@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./LandingPage.module.css";
 import Navbar from "../../components/Navbar/Navbar";
 import BackToHomePill from "../../components/BackToHomePill/BackToHomePill";
@@ -7,73 +7,42 @@ import CreateProjectModal from "../../components/modals/CreateProjectModal/Creat
 import Card from "../../components/Card/Card";
 import CollectEmailModal from "../../components/modals/CollectEmailModal/CollectEmailModal";
 import { config } from "../../App";
-
-const data = [
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#7E22CE",
-  },
-  {
-    name: "sample2 project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#F8A01D",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#6366F1",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#7E22CE",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#F8A01D",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#6366F1",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#7E22CE",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#F8A01D",
-  },
-  {
-    name: "sample project",
-    episodesCount: "4",
-    iconText: "SP",
-    iconColor: "#6366F1",
-  },
-];
+import axios from "axios";
 
 export default function LandingPage() {
   const userEmail = localStorage.getItem("email");
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    if(userEmail) {
+      const funct = async () => {
+        await fetchProjects();
+      };
+      funct();
+    }
+  }, []);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${config.endpoint}/projects`,{
+        headers: {
+          email: userEmail
+        }
+      });
+      setProjects(response.data);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <Navbar />
       <button className={styles.backtohomePill}>
         <BackToHomePill />
       </button>
-      {!userEmail || data.length === 0 ? (
+      {!userEmail || projects.length === 0 ? (
         <Hero />
       ) : (
         <div style={{ width: "100%" }}>
@@ -84,7 +53,7 @@ export default function LandingPage() {
             <CreateProjectModal type="mini" />
           </div>
           <div className={styles.projectsGrid}>
-            {data.map((project, idx) => (
+            {projects.map((project, idx) => (
               <Card
                 iconText={project.iconText}
                 iconColor={project.iconColor}
@@ -96,7 +65,7 @@ export default function LandingPage() {
           </div>
         </div>
       )}
-      {!userEmail && <CollectEmailModal />}
+      {!userEmail && <CollectEmailModal setProjects={setProjects} />}
     </>
   );
 }

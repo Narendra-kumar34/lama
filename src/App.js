@@ -7,7 +7,7 @@ import WidgetConfigurationPage from './pages/WidgetConfigurationPage/WidgetConfi
 import AccountSettingsPage from './pages/AccountSettingsPage/AccountSettingsPage';
 
 export const config = {
-  endpoint: "localhost:8082/v1"
+  endpoint: "http://localhost:8082/v1"
 }
 
 const router = createBrowserRouter([

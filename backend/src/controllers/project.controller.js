@@ -4,7 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const { projectService } = require("../services");
 
 const getProjects = catchAsync(async (req, res) => {
-    const projects = await projectService.getProjects(req.body.email);
+    const projects = await projectService.getProjects(req.headers.email);
     let projDetails = [];
     if(projects.length > 0) {
         projDetails = projects.map((project) => ({
