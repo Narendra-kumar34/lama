@@ -6,6 +6,10 @@ import EditTranscriptPage from './pages/EditTranscriptPage/EditTranscriptPage';
 import WidgetConfigurationPage from './pages/WidgetConfigurationPage/WidgetConfigurationPage';
 import AccountSettingsPage from './pages/AccountSettingsPage/AccountSettingsPage';
 
+export const config = {
+  endpoint: "localhost:8082/v1"
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
