@@ -11,7 +11,7 @@ export default function AccountSettingsPage() {
 
     return(
         <div className={styles.wrapper}>
-            <StaticDrawer projectName={projectName} />
+            <StaticDrawer projectName={projectName} sectionName="settings" />
             <div className={styles.accountSectionWrapper}>
                 <InsiderNavbar sectionName="/ Account Settings" />
                 <AccountSection />

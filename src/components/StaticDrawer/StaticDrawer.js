@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import SettingsIcon from "../../assets/settingsIcon.png";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function StaticDrawer({ projectName="sampleProject" }) {
+export default function StaticDrawer({ projectName="sampleProject", sectionName }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -26,11 +26,11 @@ export default function StaticDrawer({ projectName="sampleProject" }) {
           Podcast Upload Flow
         </div>
         <div className={styles.optionsWrapper}>
-          <button className={styles.Button} onClick={() => handleNavigate("/projects")}>
+          <button className={styles.Button} onClick={() => handleNavigate("/projects")} style={sectionName === "Upload" ? { backgroundColor: "var(--color-primary)" } : {}}>
             <div className={styles.optionNumber}>1</div>
             <div>Projects</div>
           </button>
-          <button className={styles.Button} onClick={() => handleNavigate("/configuration")}>
+          <button className={styles.Button} onClick={() => handleNavigate("/configuration")} style={sectionName === "config" ? { backgroundColor: "var(--color-primary)" } : {}}>
             <div className={styles.optionNumber}>2</div>
             <div>Widget Configurations</div>
           </button>
@@ -57,7 +57,7 @@ export default function StaticDrawer({ projectName="sampleProject" }) {
             paddingBottom: "0.5rem",
           }}
         ></div>
-        <button className={styles.Button} style={{marginBottom: "0.5rem"}} onClick={() => handleNavigate("/settings")}>
+        <button className={styles.Button} style={{ marginBottom: "0.5rem", ...(sectionName === "settings" ? { backgroundColor: "var(--color-primary)" } : {}) }} onClick={() => handleNavigate("/settings")} >
           <div className={styles.optionNumber} style={{padding: "10px", height: "40px", width: "40px"}}>
             <img alt="settings" src={SettingsIcon} />
           </div>
